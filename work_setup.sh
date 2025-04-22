@@ -9,6 +9,19 @@
 REGISTER_NAME="nmkp-soreg"
 IDE="vscode"
 
+# Check for required commands
+if ! command -v qdbus &> /dev/null || ! command -v konsole &> /dev/null; then
+    echo "Error: Required commands 'qdbus' or 'konsole' are not available."
+    exit 1
+fi
+
+# Validate IDE argument
+if ["$1" != "''"] && [ "$1" != "vscode" ] && [ "$1" != "haystack" ] && [ "$1" != "-h" ] && [ "$1" != "--help" ]; then
+    echo "Error: Unsupported IDE '$1'. Supported options are 'vscode' or 'haystack'."
+    exit 1
+fi
+
+
 # Help function
 show_help() {
     echo "Usage: $(basename "$0") [options] [ide] [register_name]"
@@ -43,10 +56,13 @@ if [ "$2" ]; then
     REGISTER_NAME=$2
 fi
 
-nmkp="cd /home/dev/Projects/workspace/kvalreg-nmkp"
-nmkpappcore="cd /home/dev/Projects/workspace/kvalreg-nmkp/modules/nmkp-app-core"
-register="cd /home/dev/Projects/workspace/$REGISTER_NAME"
-registerfrontend="cd /home/dev/Projects/workspace/$REGISTER_NAME/frontend"
+# Replace workspace path with your own
+WORKSPACE_PATH="/home/dev/Projects/workspace"
+nmkp="cd $WORKSPACE_PATH/kvalreg-nmkp"
+nmkpappcore="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-app-core"
+register="cd $WORKSPACE_PATH/$REGISTER_NAME"
+registerfrontend="cd $WORKSPACE_PATH/$REGISTER_NAME/frontend"
+
 
 konsole --hold --layout $HOME/nmkp-tabs-layout.json & KPID=$!
 
