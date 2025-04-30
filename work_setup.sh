@@ -56,7 +56,7 @@ register="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra"
 registerfrontend="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra/frontend"
 
 
-konsole --hold --layout $HOME/nmkp-tabs-layout.json & KPID=$!
+konsole --hold --layout nmkp-tabs-layout.json & KPID=$!
 
 sleep 0.5
 
