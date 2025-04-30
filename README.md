@@ -34,7 +34,7 @@ This script sets up a complete development environment for NMKP (Norsk Medisinsk
 ./work_setup.sh vscode
 
 # Use Haystack with nmkp-test register
-./work_setup.sh haystack nmkp-test
+./work_setup.sh haystack
 ```
 
 ## Features
