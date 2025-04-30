@@ -5,8 +5,6 @@
 # 1. <vscode|haystack> - The IDE to use
 # 2. <register_name> - The name of the register (default: nmkp-soreg)
 
-# defaults
-REGISTER_NAME="nmkp-soreg"
 IDE="vscode"
 
 # Check for required commands
@@ -33,11 +31,9 @@ show_help() {
     echo
     echo "Arguments:"
     echo "  ide             The IDE to use (vscode or haystack), default: vscode"
-    echo "  register_name   The name of the register, default: nmkp-soreg"
     echo
     echo "Examples:"
     echo "  $(basename "$0") vscode              # Use VSCode with default register"
-    echo "  $(basename "$0") haystack nmkp-test  # Use Haystack with nmkp-test register"
     exit 0
 }
 
@@ -52,16 +48,12 @@ elif [ "$1" == "haystack" ]; then
     IDE="haystack"
 fi
 
-if [ "$2" ]; then
-    REGISTER_NAME=$2
-fi
-
 # Replace workspace path with your own
 WORKSPACE_PATH="/home/dev/Projects/workspace"
 nmkp="cd $WORKSPACE_PATH/kvalreg-nmkp"
 nmkpappcore="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-app-core"
-register="cd $WORKSPACE_PATH/$REGISTER_NAME"
-registerfrontend="cd $WORKSPACE_PATH/$REGISTER_NAME/frontend"
+register="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra"
+registerfrontend="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra/frontend"
 
 
 konsole --hold --layout $HOME/nmkp-tabs-layout.json & KPID=$!
@@ -79,8 +71,8 @@ qdbus $service /Sessions/4 org.kde.konsole.Session.runCommand "${registerfronten
 # Set tab titles
 qdbus $service /Sessions/1 setTitle 1 'NMKP'
 qdbus $service /Sessions/2 setTitle 1 'NMKP App Core'
-qdbus $service /Sessions/3 setTitle 1 "$REGISTER_NAME"
-qdbus $service /Sessions/4 setTitle 1 "$REGISTER_NAME frontend"
+qdbus $service /Sessions/3 setTitle 1 "Fenestra"
+qdbus $service /Sessions/4 setTitle 1 "Fenestra frontend"
 
 
 # Open up IDE of choice 
