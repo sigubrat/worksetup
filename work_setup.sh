@@ -14,7 +14,7 @@ if ! command -v qdbus &> /dev/null || ! command -v konsole &> /dev/null; then
 fi
 
 # Validate IDE argument
-if ["$1" != "''"] && [ "$1" != "vscode" ] && [ "$1" != "haystack" ] && [ "$1" != "-h" ] && [ "$1" != "--help" ]; then
+if [ -n "$1" ] && [ "$1" != "vscode" ] && [ "$1" != "haystack" ] && [ "$1" != "-h" ] && [ "$1" != "--help" ]; then
     echo "Error: Unsupported IDE '$1'. Supported options are 'vscode' or 'haystack'."
     exit 1
 fi
@@ -83,7 +83,6 @@ fi
 if [ "$IDE" == "vscode" ]; then
     # Open VSCode instances in new konsole tabs
     konsole --new-tab --workdir /home/dev/Projects/workspace/kvalreg-nmkp -e "code ."
-    konsole --new-tab --workdir /home/dev/Projects/workspace/$REGISTER_NAME -e "code ."
 fi
 
 
