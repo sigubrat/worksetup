@@ -63,12 +63,11 @@ service="$(qdbus | grep -B1 konsole | grep -v -- -- | sort -t"." -k2 -n | tail -
 # Run commands in new tabs
 qdbus $service /Sessions/1 org.kde.konsole.Session.runCommand "${nmkp}"
 qdbus $service /Sessions/2 org.kde.konsole.Session.runCommand "${nmkpappcore}"
-qdbus $service /Sessions/3 org.kde.konsole.Session.runCommand "${nmkpserver}"
+
 
 # Set tab titles
 qdbus $service /Sessions/1 setTitle 1 'NMKP'
 qdbus $service /Sessions/2 setTitle 1 'NMKP App Core'
-qdbus $service /Sessions/3 setTitle 1 "NMKP Server"
 
 qdbus $service /Sessions
 
