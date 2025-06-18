@@ -52,9 +52,7 @@ fi
 WORKSPACE_PATH="/home/dev/Projects/workspace"
 nmkp="cd $WORKSPACE_PATH/kvalreg-nmkp"
 nmkpappcore="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-app-core"
-register="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra"
-registerfrontend="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-fenestra/frontend"
-
+nmkpserver="cd $WORKSPACE_PATH/kvalreg-nmkp/modules/nmkp-server"
 
 konsole --hold --layout nmkp-tabs-layout.json & KPID=$!
 
@@ -65,15 +63,14 @@ service="$(qdbus | grep -B1 konsole | grep -v -- -- | sort -t"." -k2 -n | tail -
 # Run commands in new tabs
 qdbus $service /Sessions/1 org.kde.konsole.Session.runCommand "${nmkp}"
 qdbus $service /Sessions/2 org.kde.konsole.Session.runCommand "${nmkpappcore}"
-qdbus $service /Sessions/3 org.kde.konsole.Session.runCommand "${register}"
-qdbus $service /Sessions/4 org.kde.konsole.Session.runCommand "${registerfrontend}"
+qdbus $service /Sessions/3 org.kde.konsole.Session.runCommand "${nmkpserver}"
 
 # Set tab titles
 qdbus $service /Sessions/1 setTitle 1 'NMKP'
 qdbus $service /Sessions/2 setTitle 1 'NMKP App Core'
-qdbus $service /Sessions/3 setTitle 1 "Fenestra"
-qdbus $service /Sessions/4 setTitle 1 "Fenestra frontend"
+qdbus $service /Sessions/3 setTitle 1 "NMKP Server"
 
+qdbus $service /Sessions
 
 # Open up IDE of choice 
 if [ "$IDE" == "haystack" ]; then
